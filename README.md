@@ -1,16 +1,13 @@
-# React + Vite
+# Environment(-ish) Variable
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+You'll need to configure the backend server's URL before the API can be reached.
 
-Currently, two official plugins are available:
+Instead of using a `.env` file, I chose to include a `config.js` file in the `/public` folder that doesn't require building and re-building to change the values.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+After the project is built, in the `/dist` folder that contains the static files to host, you'll find a `config.example.js` file.
 
-## React Compiler
+Edit the value of the `API_URL:` property to the URL of the hosted Backend server, and save changes.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Next, rename the file from `config.example.js` to `config.js`.
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Now the project is ready to be uploaded where ever it gets hosted.

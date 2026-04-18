@@ -1,0 +1,62 @@
+.hero {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 2em;
+
+    padding: 3em;
+
+    @media (max-width: 1200px) {
+        flex-direction: column;
+        padding: 1em;
+
+        gap: 1em;
+    }
+}
+
+.hero_text {
+    flex: 0 0 30%;
+}
+
+.hero_text > h1 {
+    font-family: var(--secondary-font);
+    letter-spacing: 1.5px;
+    line-height: 1.2;
+    font-size: 3rem;
+
+    @media (max-width: 768px) {
+        text-align: center;
+    }
+}
+
+.hero_text > p {
+    margin-block: 1.5em;
+    font-size: 1.5rem;
+    font-weight: 400;
+
+    max-width: 600px;
+}
+
+.hero_text > a {
+    display: block;
+    width: fit-content;
+
+    padding: 10px 14px;
+
+    background-color: #fff;
+    border: 2px solid var(--secondary-highlight);
+    border-radius: 8px;
+
+    font: inherit;
+    font-size: 1.2rem;
+    color: var(--font-color);
+    text-decoration: none;
+
+    &:hover {
+        background-color: var(--secondary-alpha);
+    }
+
+    @media (max-width: 768px) {
+        margin-inline: auto;
+    }
+}

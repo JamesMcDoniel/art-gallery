@@ -1,0 +1,44 @@
+.breadcrumbs {
+    max-width: 1800px;
+    margin-inline: auto;
+    padding-block: 1em;
+    font-family: var(--secondary-font);
+    letter-spacing: 1.5px;
+    font-size: 1.5rem;
+}
+
+.breadcrumbs ol {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5em;
+
+    list-style: none;
+}
+
+.breadcrumbs li {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+}
+
+.breadcrumbs a {
+    color: var(--font-color);
+    text-decoration: none;
+
+    transition: color 0.2s ease;
+}
+
+.breadcrumbs a:hover {
+    color: var(--secondary-highlight);
+}
+
+.breadcrumbs .current {
+    letter-spacing: 1.5px;
+    color: var(--secondary-highlight);
+}
+
+.breadcrumbs svg {
+    margin-top: 0.25em;
+    font-size: 1rem;
+}

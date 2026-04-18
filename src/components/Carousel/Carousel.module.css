@@ -1,0 +1,146 @@
+.carousel_container {
+    position: relative;
+
+    max-width: 1200px;
+    min-width: 300px;
+}
+
+.embla {
+    overflow: hidden;
+    position: relative;
+    background: rgb(0, 0, 0);
+
+    border-radius: 20px;
+}
+
+.embla__container {
+    display: flex;
+}
+
+.embla_fs {
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 999;
+    background-color: #000;
+}
+
+.embla_fs .embla__container {
+    height: 100%;
+    display: flex;
+}
+
+.embla__slide {
+    flex: 0 0 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    max-height: 750px;
+}
+
+.embla_fs .embla__slide {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    max-height: 100vh;
+}
+
+.embla__img {
+    width: 100%;
+    height: 100%;
+    max-height: 600px;
+    object-fit: contain;
+    user-select: none;
+}
+
+.carousel_container:hover .nav_button,
+.nav_button:focus-visible,
+.carousel_container:hover .fs_toggle,
+.fs_toggle:focus-visible {
+    opacity: 1;
+}
+
+.nav_button {
+    opacity: 0;
+
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 50%;
+    width: 50px;
+
+    background-color: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+
+    font-size: 1.5rem;
+    color: #fff;
+
+    cursor: pointer;
+
+    transition:
+        background-color 0.2s ease,
+        opacity 0.2s ease;
+}
+
+.nav_button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.prev {
+    left: 1rem;
+}
+
+.next {
+    right: 1rem;
+}
+
+.fs_toggle {
+    opacity: 0;
+
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    z-index: 10;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 50px;
+    width: 50px;
+
+    background-color: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+
+    font-size: 1.5rem;
+    color: #fff;
+
+    cursor: pointer;
+
+    transition:
+        background-color 0.2s ease,
+        opacity 0.2s ease;
+
+    @media (max-width: 768px) {
+        display: none;
+    }
+}
+
+.fs_toggle:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
