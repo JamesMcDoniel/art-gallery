@@ -15,7 +15,7 @@
     @media (max-height: 768px) {
         grid-template-columns: repeat(
             auto-fit,
-            minmax(max(300px, 100%/4), 1fr)
+            minmax(max(288px, 100%/4), 1fr)
         );
         gap: 2em;
     }
