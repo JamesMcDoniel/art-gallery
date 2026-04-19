@@ -4,18 +4,49 @@
     justify-content: center;
     gap: 2em;
 
+    margin-top: 3em;
     padding: 3em;
 
+    background: linear-gradient(
+        to left,
+        var(--primary-color) 0%,
+        var(--secondary-color) 100%
+    );
+
     @media (max-width: 1200px) {
+        margin-top: 0;
+
         flex-direction: column;
         padding: 1em;
-
-        gap: 1em;
     }
 }
 
+.hero > div:first-child {
+    box-shadow:
+        rgba(0, 0, 0, 0.06) 0px 2px 1px,
+        rgba(0, 0, 0, 0.09) 0px 4px 2px,
+        rgba(0, 0, 0, 0.09) 0px 8px 4px,
+        rgba(0, 0, 0, 0.09) 0px 16px 8px,
+        rgba(0, 0, 0, 0.09) 0px 32px 16px;
+}
+
 .hero_text {
-    flex: 0 0 30%;
+    flex: 0 0 35%;
+
+    padding: 1em;
+
+    background-color: rgb(250, 250, 250);
+    border-radius: 20px;
+
+    box-shadow:
+        rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset,
+        rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset,
+        rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset,
+        rgba(0, 0, 0, 0.06) 0px 2px 1px,
+        rgba(0, 0, 0, 0.09) 0px 4px 2px,
+        rgba(0, 0, 0, 0.09) 0px 8px 4px,
+        rgba(0, 0, 0, 0.09) 0px 16px 8px,
+        rgba(0, 0, 0, 0.09) 0px 32px 16px;
 }
 
 .hero_text > h1 {
@@ -23,10 +54,7 @@
     letter-spacing: 1.5px;
     line-height: 1.2;
     font-size: 3rem;
-
-    @media (max-width: 768px) {
-        text-align: center;
-    }
+    text-align: center;
 }
 
 .hero_text > p {
@@ -35,15 +63,18 @@
     font-weight: 400;
 
     max-width: 600px;
+    text-align: center;
+    margin-inline: auto;
 }
 
 .hero_text > a {
     display: block;
     width: fit-content;
 
+    margin-inline: auto;
     padding: 10px 14px;
 
-    background-color: #fff;
+    /* background-color: #fff; */
     border: 2px solid var(--secondary-highlight);
     border-radius: 8px;
 
@@ -54,9 +85,5 @@
 
     &:hover {
         background-color: var(--secondary-alpha);
-    }
-
-    @media (max-width: 768px) {
-        margin-inline: auto;
     }
 }

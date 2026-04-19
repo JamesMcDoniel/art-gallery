@@ -3,6 +3,7 @@ import { useGalleryType } from '../../hooks/useGalleryType';
 import Loading from '../../components/Loading';
 import Breadcrumbs from '../../components/Breadcrumbs';
 import Pagination from '../../components/Pagination';
+import Image from '../../components/Image';
 import styles from './GalleryType.module.css';
 
 const GalleryType = () => {
@@ -27,6 +28,13 @@ const GalleryType = () => {
                                     <p className={styles.card_title}>
                                         {item.name}
                                     </p>
+                                    {item.thumbnail ? (
+                                        <Image
+                                            src={item.thumbnail}
+                                            alt=""
+                                            loading="lazy"
+                                        />
+                                    ) : null}
                                 </div>
                             </Link>
                         ))}
@@ -35,7 +43,7 @@ const GalleryType = () => {
                     <Pagination totalCount={totalCount} />
                 </>
             ) : (
-                <p>No items found</p>
+                <p className={styles.empty}>No results found</p>
             )}
         </section>
     ) : (

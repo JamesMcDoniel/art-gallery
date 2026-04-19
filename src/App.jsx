@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router';
 import Layout from './components/Layout';
+import Redirect from './components/Redirect';
 import Home from './pages/Home';
 import Gallery from './pages/Gallery';
 import GalleryType from './pages/GalleryType';
@@ -36,10 +37,16 @@ const App = () => {
                         />
                     </Route>
 
-                    <Route
-                        path="/artwork/:slug"
-                        element={<Artwork />}
-                    />
+                    <Route path="artwork">
+                        <Route
+                            index
+                            element={<Redirect />}
+                        />
+                        <Route
+                            path="/artwork/:slug"
+                            element={<Artwork />}
+                        />
+                    </Route>
 
                     <Route
                         path="*"

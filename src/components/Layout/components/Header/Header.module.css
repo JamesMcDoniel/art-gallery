@@ -28,6 +28,10 @@
     }
 }
 
+.container > div > a {
+    width: 195px;
+}
+
 .mobile_btn {
     display: none;
 
@@ -62,7 +66,6 @@
         height: calc(100vh - 90px);
         width: 100%;
 
-        /* background-color: blue; */
         background: linear-gradient(
             to right,
             var(--primary-color) 0%,
@@ -94,7 +97,7 @@
 
     @media (max-width: 1010px) {
         flex-direction: column;
-        gap: 2em;
+        gap: 1em;
         width: 100%;
         padding: 0;
     }

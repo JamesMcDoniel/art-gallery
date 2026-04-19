@@ -1,7 +1,6 @@
 import { Link } from 'react-router';
 import styles from './Gallery.module.css';
 import Breadcrumbs from '../../components/Breadcrumbs';
-import Image from '../../components/Image';
 
 const Gallery = () => {
     return (

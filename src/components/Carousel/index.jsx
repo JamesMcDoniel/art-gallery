@@ -1,123 +1,11 @@
-import { useState, useEffect, useRef, useCallback } from 'react';
-import { Button } from '@headlessui/react';
+import { useCallback } from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
-import Autoplay from 'embla-carousel-autoplay';
-import Fade from 'embla-carousel-fade';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-    faUpRightAndDownLeftFromCenter,
-    faDownLeftAndUpRightToCenter
-} from '@fortawesome/free-solid-svg-icons';
+import { Button } from '@headlessui/react';
 import Image from '../Image';
-import { API_URL } from '../../helpers/constants';
 import styles from './Carousel.module.css';
 
-const Carousel = () => {
-    const [images, setImages] = useState([]);
-    const [_page, setPage] = useState(1);
-    const [isFullscreen, setIsFullscreen] = useState(false);
-    const [isLoading, setIsLoading] = useState(false);
-    const originalImages = useRef([]);
-    const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [
-        Autoplay({ delay: 5000, stopOnInteraction: false })
-    ]);
-
-    useEffect(() => {
-        const fetchInitial = async () => {
-            const response = await fetch(
-                `${API_URL}/api/v1/public/recommendations`
-            );
-            const data = await response.json();
-
-            const initialSet = [data.randomImagePath, ...data.recommendations];
-
-            originalImages.current = initialSet;
-            setImages(initialSet);
-        };
-
-        fetchInitial();
-    }, []);
-
-    const loadMore = useCallback(
-        async (pageNum) => {
-            if (isLoading) return;
-
-            setIsLoading(true);
-
-            try {
-                const response = await fetch(
-                    `${API_URL}/api/v1/public/random?page=${pageNum}&pageSize=10`
-                );
-                const data = await response.json();
-
-                setImages((prev) => [...prev, ...data]);
-            } catch (error) {
-                console.log(error);
-            } finally {
-                setIsLoading(false);
-            }
-        },
-        [isLoading]
-    );
-
-    useEffect(() => {
-        if (!emblaApi || !isFullscreen) return;
-
-        const onSelect = () => {
-            const currentIndex = emblaApi.selectedScrollSnap();
-            const totalSlides = emblaApi.scrollSnapList().length;
-
-            if (currentIndex >= totalSlides - 2 && !isLoading) {
-                setPage((prev) => {
-                    const nextPage = prev + 1;
-                    loadMore(nextPage);
-
-                    return nextPage;
-                });
-            }
-        };
-
-        emblaApi.on('select', onSelect);
-        return () => emblaApi.off('select', onSelect);
-    }, [emblaApi, isFullscreen, isLoading, loadMore]);
-
-    useEffect(() => {
-        const handleFsChange = () => {
-            const isFs = !!document.fullscreenElement;
-            setIsFullscreen(isFs);
-
-            if (emblaApi) {
-                const plugins = isFs
-                    ? [
-                          Autoplay({ delay: 5000, stopOnInteraction: false }),
-                          Fade()
-                      ]
-                    : [Autoplay({ delay: 5000, stopOnInteraction: false })];
-
-                if (!isFs) {
-                    setImages(originalImages.current);
-                    setPage(1);
-
-                    emblaApi.scrollTo(0, true);
-                }
-
-                emblaApi.reInit({ loop: !isFs }, plugins);
-            }
-        };
-
-        document.addEventListener('fullscreenchange', handleFsChange);
-        return () =>
-            document.removeEventListener('fullscreenchange', handleFsChange);
-    }, [emblaApi]);
-
-    useEffect(() => {
-        if (emblaApi) {
-            const currentIndex = emblaApi.selectedScrollSnap();
-
-            emblaApi.reInit();
-            emblaApi.scrollTo(currentIndex, true);
-        }
-    }, [images, emblaApi]);
+const Carousel = ({ images = [] }) => {
+    const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
 
     const scrollPrev = useCallback(() => {
         if (emblaApi) emblaApi.scrollPrev();
@@ -127,74 +15,42 @@ const Carousel = () => {
         if (emblaApi) emblaApi.scrollNext();
     }, [emblaApi]);
 
-    const toggleFullscreen = useCallback(() => {
-        const element = document.getElementById('fullscreen');
-
-        if (!document.fullscreenElement) {
-            element.requestFullscreen();
-        } else {
-            document.exitFullscreen();
-        }
-    }, []);
-
     return (
-        <div className={styles.carousel_container}>
+        <div className={styles.carousel}>
             <div
-                id="fullscreen"
-                className={isFullscreen ? styles.embla_fs : styles.embla}
+                className={styles.viewport}
                 ref={emblaRef}
             >
-                <div className={styles.embla__container}>
-                    {images.map((src, index) => (
+                <div className={styles.container}>
+                    {images.map((image) => (
                         <div
-                            className={styles.embla__slide}
-                            key={`${src}-${index}`}
+                            key={image}
+                            className={styles.slide}
                         >
                             <Image
-                                className={styles.embla__img}
-                                src={src}
+                                className={styles.image}
+                                src={image}
                                 alt=""
+                                loading="lazy"
                             />
                         </div>
                     ))}
                 </div>
-                {!isFullscreen ? (
-                    <>
-                        <Button
-                            className={`${styles.nav_button} ${styles.prev}`}
-                            type="button"
-                            onClick={scrollPrev}
-                            aria-label="Previous Slide"
-                        >
-                            &#10094;
-                        </Button>
-                        <Button
-                            className={`${styles.nav_button} ${styles.next}`}
-                            type="button"
-                            onClick={scrollNext}
-                            aria-label="Next Slide"
-                        >
-                            &#10095;
-                        </Button>
-                    </>
-                ) : null}
-
-                <Button
-                    className={styles.fs_toggle}
-                    type="button"
-                    onClick={toggleFullscreen}
-                    aria-label="Full Screen"
-                >
-                    <FontAwesomeIcon
-                        icon={
-                            isFullscreen
-                                ? faDownLeftAndUpRightToCenter
-                                : faUpRightAndDownLeftFromCenter
-                        }
-                        flip="horizontal"
-                    />
-                </Button>
             </div>
+            <Button
+                className={`${styles.button} ${styles.prev}`}
+                type="button"
+                onClick={scrollPrev}
+            >
+                &#10094;
+            </Button>
+            <Button
+                className={`${styles.button} ${styles.next}`}
+                type="button"
+                onClick={scrollNext}
+            >
+                &#10095;
+            </Button>
         </div>
     );
 };

@@ -28,7 +28,6 @@ const GalleryResults = () => {
                                         src={item.imagePath}
                                         alt={item.title}
                                         loading="lazy"
-                                        decoding="async"
                                     />
                                 ) : null}
                                 <div className={styles.card_content}>
@@ -51,7 +50,7 @@ const GalleryResults = () => {
                     <Pagination totalCount={totalCount} />
                 </>
             ) : (
-                <p>No Items Found</p>
+                <p className={styles.empty}>No Results Found</p>
             )}
         </section>
     ) : (

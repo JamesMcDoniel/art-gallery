@@ -46,7 +46,6 @@ export const useGalleryType = () => {
 
                 const data = await response.json();
 
-                console.log(data);
                 setData(data.items || []);
                 setTotalCount(data.totalCount || 0);
             } catch (error) {
