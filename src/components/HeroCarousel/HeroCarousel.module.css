@@ -19,8 +19,6 @@
     aspect-ratio: 1 / 1;
     padding: 2em;
 
-    border-right: 2px solid #e2e8f0;
-
     & > p {
         text-align: center;
     }
